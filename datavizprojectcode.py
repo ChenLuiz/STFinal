@@ -51,7 +51,7 @@ st.write("This is outside the container")
 
 # Second chart
 # Columns for chart/controls
-col4, cols5 = st.columns(2)
+col4, col5 = st.columns(2)
 
 
 with col4:
