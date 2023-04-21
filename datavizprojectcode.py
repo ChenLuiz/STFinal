@@ -12,7 +12,7 @@ add_selectbox = st.sidebar.selectbox(
 with st.sidebar:
     add_radio = st.radio(
         "Select Map",
-        ("Mirage", "Inferno", "Nuke", "Overpass", "Cobblestone", "Dust 2", "Vertigo", "Cache", "Train"
+        ("Mirage", "Inferno", "Nuke", "Overpass", "Cobblestone", "Dust 2", "Vertigo", "Cache", "Train")
     )
 
 # Columns with individual controls
