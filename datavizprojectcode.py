@@ -4,7 +4,7 @@ import numpy as np
 # Using object notation
 add_selectbox = st.sidebar.selectbox(
     "Select Year",
-    ("2016", "2017, "2018, "2019", "2020")
+    ("2016", "2017", "2018", "2019", "2020")
 )
 
 # Using "with" notation
@@ -21,7 +21,7 @@ col1, col2, col3 = st.columns(3)
 with col1:
    add_selectbox = st.selectbox(
     "Select Year",
-    ("2016", "2017, "2018, "2019", "2020")
+    ("2016", "2017", "2018", "2019", "2020")
 
 with col2:
    add_selectbox = st.selectbox(
@@ -50,7 +50,7 @@ col4, cols5 = st.columns(2)
 with col4:
    add_selectbox = st.selectbox(
     "Select Year",
-    ("2016", "2017, "2018, "2019", "2020")
+    ("2016", "2017", "2018", "2019", "2020")
        
    add_selectbox = st.selectbox(
     "Select Map",
