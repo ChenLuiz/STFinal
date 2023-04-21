@@ -22,16 +22,19 @@ with col1:
    add_selectbox = st.selectbox(
     "Select Year",
     ("2016", "2017", "2018", "2019", "2020")
+   )
 
 with col2:
    add_selectbox = st.selectbox(
     "Select Map",
     ("Mirage", "Inferno", "Nuke", "Overpass", "Cobblestone", "Dust 2", "Vertigo", "Cache", "Train")
+   )
 
 with col3:
    add_selectbox = st.selectbox(
     "Select Event",
     ("Kato", "IEM", "Blast", "ESL")
+   )
 
 # Container with graph
 with st.container():
@@ -51,14 +54,17 @@ with col4:
    add_selectbox = st.selectbox(
     "Select Year",
     ("2016", "2017", "2018", "2019", "2020")
-       
+   )
+
    add_selectbox = st.selectbox(
     "Select Map",
     ("Mirage", "Inferno", "Nuke", "Overpass", "Cobblestone", "Dust 2", "Vertigo", "Cache", "Train")
-   
+   )
+    
    add_selectbox = st.selectbox(
     "Select Event",
     ("Kato", "IEM", "Blast", "ESL")
+   )
 
 with col5:
    # You can call any Streamlit command, including custom components:
