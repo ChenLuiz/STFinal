@@ -58,7 +58,7 @@ with st.container():
    Cumulative_maps = alt.Chart(data_chart1).transform_window(
         cumulative_count = "count()",
         sort=[{"field": "left_over"}],
-        tooltip = ['left_over']
+        tooltip = ['left_over_names']
    ).mark_area(color="darkseagreen").encode(
         x = alt.X("left_over:Q", title = "Map"),
         y = alt.Y("cumulative_count:Q", title = "Times it has been picked"),
