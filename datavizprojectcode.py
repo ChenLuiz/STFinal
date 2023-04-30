@@ -54,6 +54,9 @@ with st.container():
    data_chart1 = pd.read_csv('updated_file_new.csv')
    data_chart1_labels = pd.DataFrame({'Map': label_dict.values()})
 
+   # To STR
+   data['left_over_names'] = data['left_over_names'].astype(str)
+
    # create a chart with the area mark
    Cumulative_maps = alt.Chart(data_chart1).transform_window(
         cumulative_count = "count()",
