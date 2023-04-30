@@ -51,7 +51,7 @@ with st.container():
    # You can call any Streamlit command, including custom components:
    label_dict = {1: 'Cache', 2: 'Cobblestone', 3: 'Dust2', 4: 'Inferno', 5: 'Mirage', 6: 'Nuke', 7: 'Overpass', 8: 'Train', 9: 'Vertigo'}
 
-   data_chart1 = pd.read_csv('updated_file_new.csv')
+   data_chart1 = pd.read_csv('updated_file.csv')
    data_chart1_labels = pd.DataFrame({'Map': label_dict.values()})
 
    # create a chart with the area mark
