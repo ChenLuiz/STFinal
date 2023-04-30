@@ -1,5 +1,9 @@
 import streamlit as st
 import numpy as np
+import pandas as pd
+import altair as alt
+
+alt.data_transformers.disable_max_rows()
 
 # Using object notation
 add_selectbox = st.sidebar.selectbox(
@@ -45,7 +49,28 @@ with st.container():
    st.write("This is inside the container")
 
    # You can call any Streamlit command, including custom components:
-   st.bar_chart(np.random.randn(50, 3))
+   label_dict = {1: 'Cache', 2: 'Cobblestone', 3: 'Dust2', 4: 'Inferno', 5: 'Mirage', 6: 'Nuke', 7: 'Overpass', 8: 'Train', 9: 'Vertigo'}
+
+    data_chart1 = pd.read_csv('updated_file_new.csv')
+    data_chart1_labels = pd.DataFrame({'Map': label_dict.values()})
+
+    # create a chart with the area mark
+    Cumulative_maps = alt.Chart(data_chart1).transform_window(
+        cumulative_count = "count()",
+        sort=[{"field": "left_over"}],
+        #tooltip = ['left_over']
+    ).mark_area(color="darkseagreen").encode(
+        x = alt.X("left_over:Q", 'Map:N', title = "Map"),
+        y = alt.Y("cumulative_count:Q", title = "Times it has been picked"),
+    )
+
+    # create a chart with the vertical lines
+    Map_ticks = alt.Chart(data_chart1_labels).mark_rule(color='seagreen', strokeWidth=5).encode(
+        x=alt.X('Map:N', axis=None),
+    )
+
+    # layer the two charts and show the result
+    st.altair_chart(Cumulative_maps + Map_ticks, use_container_width=True)
 
 st.write("This is outside the container")
 
