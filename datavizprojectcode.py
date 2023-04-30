@@ -54,14 +54,10 @@ with st.container():
    data_chart1 = pd.read_csv('updated_file_new.csv')
    data_chart1_labels = pd.DataFrame({'Map': label_dict.values()})
 
-   # To STR
-   data_chart1['left_over_names'] = data_chart1['left_over_names'].astype(str)
-
    # create a chart with the area mark
    Cumulative_maps = alt.Chart(data_chart1).transform_window(
         cumulative_count = "count()",
         sort=[{"field": "left_over"}],
-        tooltip = data_chart1['left_over_names']
    ).mark_area(color="darkseagreen").encode(
         x = alt.X("left_over:Q", title = "Map"),
         y = alt.Y("cumulative_count:Q", title = "Times it has been picked"),
