@@ -55,7 +55,7 @@ with st.container():
    data_chart1_labels = pd.DataFrame({'Map': label_dict.values()})
 
    # To STR
-   data['left_over_names'] = data['left_over_names'].astype(str)
+   data_chart1['left_over_names'] = data_chart1['left_over_names'].astype(str)
 
    # create a chart with the area mark
    Cumulative_maps = alt.Chart(data_chart1).transform_window(
