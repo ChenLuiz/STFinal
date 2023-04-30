@@ -60,7 +60,7 @@ with st.container():
         sort=[{"field": "left_over"}],
         #tooltip = ['left_over']
    ).mark_area(color="darkseagreen").encode(
-        x = alt.X("left_over:Q", title = "Map", axis=alt.Axis(values=['Cache', 'Cobblestone', 'Dust2', 'Inferno', 'Mirage', 'Nuke', 'Overpass', 'Train', 'Vertigo'])),
+        x = alt.X("left_over:Q", title = "Map", axis=alt.Axis(values=[1, 2, 3, 4, 5, 6, 7, 8, 9])),
         y = alt.Y("cumulative_count:Q", title = "Times it has been picked"),
    )
 
