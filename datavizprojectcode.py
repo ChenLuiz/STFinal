@@ -115,5 +115,5 @@ with col5:
    grid=False
    ).interactive()
 
-   st.altair_chart(bars, use_container_width=True)
+   st.altair_chart(bars, use_container_width=False)
 
