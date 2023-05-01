@@ -100,4 +100,27 @@ with col4:
 
 with col5:
    # You can call any Streamlit command, including custom components:
-   st.bar_chart(np.random.randn(50, 3))
+   # Loading data
+    data_bar = pd.read_csv('ban_count.csv')
+
+    # Making sure its numeric
+    data_bar['count'] = pd.to_numeric(data_bar['count'])
+
+    # Making chart
+    bars = alt.Chart(data_bar).mark_bar().encode(
+        alt.X('count:Q', axis=None, title = "Count"),
+        alt.Y('map_name:N', sort=alt.EncodingSortField('count', order='ascending'), title = "Map Name"),
+        color='map_name:N',
+        angle=alt.Angle('map_name:N', sort=alt.EncodingSortField('count', order='ascending')),
+        tooltip=['count:Q']
+    ).properties(
+        width=600,
+        height=600
+    ).configure_axis(
+        grid=False
+    ).interactive().configure_legend(
+        orient='right'
+    )
+
+    st.altair_chart(bars, use_container_width=True)
+
