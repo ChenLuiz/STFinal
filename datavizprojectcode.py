@@ -100,27 +100,20 @@ with col4:
 
 with col5:
    # You can call any Streamlit command, including custom components:
-   # Loading data
-    data_bar = pd.read_csv('ban_count.csv')
+   data = pd.read_csv('ban_count.csv')
 
-    # Making sure its numeric
-    data_bar['count'] = pd.to_numeric(data_bar['count'])
-
-    # Making chart
-    bars = alt.Chart(data_bar).mark_bar().encode(
-        alt.X('count:Q', axis=None, title = "Count"),
-        alt.Y('map_name:N', sort=alt.EncodingSortField('count', order='ascending'), title = "Map Name"),
-        color='map_name:N',
-        angle=alt.Angle('map_name:N', sort=alt.EncodingSortField('count', order='ascending')),
-        tooltip=['count:Q']
-    ).properties(
-        width=600,
-        height=600
-    ).configure_axis(
-        grid=False
-    ).interactive().configure_legend(
-        orient='right'
-    )
+   bars = alt.Chart(data).mark_bar(strokeWidth=1, stroke='black').encode(
+   alt.X('count:Q', axis=alt.Axis(ticks=True), title="Count"),
+   alt.Y('map_name:N', sort=alt.EncodingSortField('count', order='ascending'), title="Map Name"),
+   color=alt.Color('colors:N', scale=None),
+   angle=alt.Angle('map_name:N', sort=alt.EncodingSortField('count', order='ascending')),
+   tooltip=['count:Q']
+   ).properties(
+   width=600,
+   height=600
+   ).configure_axis(
+   grid=False
+    ).interactive()
 
     st.altair_chart(bars, use_container_width=True)
 
