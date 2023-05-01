@@ -117,3 +117,16 @@ with col5:
 
    st.altair_chart(bars, use_container_width=False)
 
+with st.container():
+    data_scatter = pd.read_csv('pick_count.csv')
+
+    scatter_plot = alt.Chart(data_scatter).mark_circle(size=100, strokeWidth=1, stroke='black').encode(
+    x=alt.X('Count_pick', axis=alt.Axis(title='Count Pick')),
+    y=alt.Y('Count_ban', axis=alt.Axis(title='Count Ban')),
+    color=alt.Color('colors:N', scale=None),
+    tooltip=['Map Name', 'Count_pick', 'Count_ban']
+    ).properties(
+    title='Pick vs Ban rate of CS:GO maps'
+    ).interactive()
+
+    st.altair_chart(scatter_plot, use_container_width=True)
