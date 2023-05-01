@@ -113,7 +113,7 @@ with col5:
    height=600
    ).configure_axis(
    grid=False
-    ).interactive()
+   ).interactive()
 
-    st.altair_chart(bars, use_container_width=True)
+   st.altair_chart(bars, use_container_width=True)
 
