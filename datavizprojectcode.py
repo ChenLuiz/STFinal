@@ -52,7 +52,7 @@ with st.container():
     st.altair_chart(scatter_plot, use_container_width=True)
 
 
-col1, col2, col3 = st.columns(3)
+col1, col2 = st.columns(2)
 
 with col1:
    year = st.selectbox(
@@ -62,13 +62,6 @@ with col1:
    )
 
 with col2:
-   map_number = st.selectbox(
-    "Select Map",
-    ("1", "2", "3", "4", "5", "6", "7", "8", "9"),
-    key = "map_number"
-   )
-
-with col3:
    event_id = st.selectbox(
     "Select Event",
     ("3883", "4702", "4597"),
