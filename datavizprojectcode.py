@@ -38,30 +38,27 @@ with col3:
    )
 
 with st.container():
-
-   # You can call any Streamlit command, including custom components:
-   label_dict = {1: 'Cache', 2: 'Cobblestone', 3: 'Dust2', 4: 'Inferno', 5: 'Mirage', 6: 'Nuke', 7: 'Overpass', 8: 'Train', 9: 'Vertigo'}
-
    data_chart1 = pd.read_csv('updated_file.csv')
    data_chart1_labels = pd.DataFrame({'Map': label_dict.values()})
 
-   # create a chart with the area mark
-   Cumulative_maps = alt.Chart(data_chart1).transform_window(
-        cumulative_count = "count()",
-        sort=[{"field": "left_over"}],
-        #tooltip = ['left_over']
-   ).mark_area(color="darkseagreen").encode(
-        x = alt.X("left_over:Q", title = "Map", axis=alt.Axis(values=[1, 2, 3, 4, 5, 6, 7, 8, 9])),
-        y = alt.Y("cumulative_count:Q", title = "Times it has been picked"),
+   data_pie = pd.read_csv("updated_file.csv")
+
+   label_dict = {1: 'Cache', 2: 'Cobblestone', 3: 'Dust2', 4: 'Inferno', 5: 'Mirage', 6: 'Nuke', 7: 'Overpass', 8: 'Train', 9: 'Vertigo'}
+   data_pie["left_over"] = data_pie["left_over"].map(label_dict)
+
+   counts = data_pie["left_over"].value_counts().reset_index()
+   counts.columns = ["map", "count"]
+
+   pop_map = alt.Chart(counts).mark_bar().encode(
+   x=alt.X("count:Q", title="Count"),
+   y=alt.Y("map:N", title="Map", axis=alt.Axis(labelOverlap='greedy')),
+   color=alt.Color("count:Q", scale=alt.Scale(scheme="greens")),
+   tooltip=["map", "count"]
+   ).properties(
+   title="Most Popular Map"
    )
 
-   # create a chart with the vertical lines
-   Map_ticks = alt.Chart(data_chart1_labels).mark_rule(color='seagreen', strokeWidth=5).encode(
-        x=alt.X('Map:N', axis=None),
-   )
-
-   # layer the two charts and show the result
-   st.altair_chart(Cumulative_maps + Map_ticks, use_container_width=True)
+   st.altair_chart(pop_map, use_container_width=True)
 
 with st.container():
     
