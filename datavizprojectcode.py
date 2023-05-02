@@ -14,37 +14,6 @@ st.write("""The dataset used for this project is a CSGO csv database with map pi
          (this column has a lot of 0's since most matches were best of 3s) and so on. The main research question I wanted to answer is: 
          What are the most popular maps in CSGO?""")
 
-col1, col2 = st.columns(2)
-
-year_datasets = {
-         '2016': '2016.csv',
-         '2017': '2017.csv',
-         '2018': '2018.csv',
-         '2019': '2019.csv',
-         '2020': '2020.csv',
-         'All data': 'updated_file.csv'
-}
-event_datasets = {
-         '3883': '3883.csv',
-         '4597': '4597.csv',
-         '4702': '4702.csv',
-         'All data': 'updated_file.csv'
-}
-
-with col1:
-   year = st.selectbox(
-    "Select Year",
-    list(year_datasets.keys()),
-    key = "year"
-   )
-
-with col2:
-   event_id = st.selectbox(
-    "Select Event",
-    list(event_datasets.keys()),
-    key = "event_id"
-   )
-
 with st.container():
    label_dict = {1: 'Cache', 2: 'Cobblestone', 3: 'Dust2', 4: 'Inferno', 5: 'Mirage', 6: 'Nuke', 7: 'Overpass', 8: 'Train', 9: 'Vertigo'}
    data_pie = pd.read_csv('updated_file.csv')
@@ -101,3 +70,33 @@ with st.container():
    )
 
    st.altair_chart(bars, use_container_width=False)
+
+map_datasets = {
+'Cache': 'Cache.csv',
+'Cobblestone': 'Cobblestone.csv',
+'Dust 2': 'Dust_2.csv,
+'Inferno': 'Inferno.csv',
+'Mirage': 'Mirage.csv',
+'Nuke': 'Nuke.csv',
+'Overpass': 'Overpass.csv',
+'Train': 'Train.csv',
+'Vertigo': 'Vertigo.csv',
+'All data': 'updated_file.csv'
+}
+
+dataset_choice = st.selectbox('Select a dataset: ', list(map_datasets.keys()))
+
+with st.container():
+   data_chart1 = pd.read_csv(datasets[dataset_choice])
+
+   label_dict = {1: 'Cache', 2: 'Cobblestone', 3: 'Dust2', 4: 'Inferno', 5: 'Mirage', 6: 'Nuke', 7: 'Overpass', 8: 'Train', 9: 'Vertigo'}
+
+   Cumulative_maps = alt.Chart(data_chart1).transform_window(
+   cumulative_count = "count()",
+   sort=[{"field": "date"}],
+   ).mark_area(color="darkseagreen").encode(
+   x = alt.X("date:T", title = "Date"),
+   y = alt.Y("cumulative_count:Q", title = "Times it has been picked"),
+   )
+
+   st.altair_chart(Cumulative_maps, use_container_width=True)
