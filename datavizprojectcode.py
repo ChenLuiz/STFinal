@@ -17,15 +17,15 @@ st.write("""The dataset used for this project is a CSGO csv database with map pi
 col1, col2 = st.columns(2)
 
 year_datasets = {
-         '2016': '2016.csv'
-         '2017': '2017.csv'
-         '2018': '2018.csv'
-         '2019': '2019.csv'
+         '2016': '2016.csv',
+         '2017': '2017.csv',
+         '2018': '2018.csv',
+         '2019': '2019.csv',
          '2020': '2020.csv'
 }
 event_datasets = {
-         '3883': '3883.csv'
-         '4597': '4597.csv'
+         '3883': '3883.csv',
+         '4597': '4597.csv',
          '4702': '4702.csv'
 }
 
