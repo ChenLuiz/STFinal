@@ -44,7 +44,7 @@ with st.container():
     color=alt.Color('colors:N', scale=None),
     tooltip=['Map Name', 'Count_pick', 'Count_ban']
     ).properties(
-    title='Pick vs Ban rate of CS:GO maps'
+    title='Pick vs. Ban Rate of CS:GO Maps'
     ).interactive()
 
     st.altair_chart(scatter_plot, use_container_width=True)
@@ -63,7 +63,8 @@ with st.container():
    tooltip=['count:Q']
    ).properties(
    width=600,
-   height=600
+   height=600,
+   title = 'CS:GO Most Banned Maps'
    ).configure_axis(
    grid=False
    ).add_selection(
@@ -72,31 +73,34 @@ with st.container():
 
    st.altair_chart(bars, use_container_width=False)
 
-map_datasets = {
-'Cache': 'Cache.csv',
-'Cobblestone': 'Cobblestone.csv',
-'Dust 2': 'Dust_2.csv',
-'Inferno': 'Inferno.csv',
-'Mirage': 'Mirage.csv',
-'Nuke': 'Nuke.csv',
-'Overpass': 'Overpass.csv',
-'Train': 'Train.csv',
-'Vertigo': 'Vertigo.csv',
-'All data': 'updated_file.csv'
-}
+with st.container():
+         map_datasets = {
+         'Cache': 'Cache.csv',
+         'Cobblestone': 'Cobblestone.csv',
+         'Dust 2': 'Dust_2.csv',
+         'Inferno': 'Inferno.csv',
+         'Mirage': 'Mirage.csv',
+         'Nuke': 'Nuke.csv',
+         'Overpass': 'Overpass.csv',
+         'Train': 'Train.csv',
+         'Vertigo': 'Vertigo.csv',
+         'All data': 'updated_file.csv'
+         }
 
-dataset_choice = st.selectbox('Select a dataset: ', list(map_datasets.keys()))
+         dataset_choice = st.selectbox('Select a dataset: ', list(map_datasets.keys()))
 
-data_chart1 = pd.read_csv(map_datasets[dataset_choice]).sort_values('date')
-data_chart1['date'] = pd.to_datetime(data_chart1['date'])
-label_dict = {1: 'Cache', 2: 'Cobblestone', 3: 'Dust2', 4: 'Inferno', 5: 'Mirage', 6: 'Nuke', 7: 'Overpass', 8: 'Train', 9: 'Vertigo'}
+         data_chart1 = pd.read_csv(map_datasets[dataset_choice]).sort_values('date')
+         data_chart1['date'] = pd.to_datetime(data_chart1['date'])
+         label_dict = {1: 'Cache', 2: 'Cobblestone', 3: 'Dust2', 4: 'Inferno', 5: 'Mirage', 6: 'Nuke', 7: 'Overpass', 8: 'Train', 9: 'Vertigo'}
 
-Cumulative_maps = alt.Chart(data_chart1).transform_window(
-cumulative_count = "count()",
-sort=[{"field": "date"}],
-).mark_area(color="white").encode(
-x = alt.X("date:T", title = "Date"),
-y = alt.Y("cumulative_count:Q", title = "Times it has been picked"),
-)
-
-st.altair_chart(Cumulative_maps, use_container_width=True)
+         Cumulative_maps = alt.Chart(data_chart1).transform_window(
+         cumulative_count = "count()",
+         sort=[{"field": "date"}],
+         ).mark_area(color="white").encode(
+         x = alt.X("date:T", title = "Date"),
+         y = alt.Y("cumulative_count:Q", title = "Times it has been picked"),
+         ).properties(
+         title='Frequency of Maps Picked Over Time'
+         )
+         
+         st.altair_chart(Cumulative_maps, use_container_width=True)
