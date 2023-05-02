@@ -74,7 +74,7 @@ with st.container():
 map_datasets = {
 'Cache': 'Cache.csv',
 'Cobblestone': 'Cobblestone.csv',
-'Dust 2': 'Dust_2.csv,
+'Dust 2': 'Dust_2.csv',
 'Inferno': 'Inferno.csv',
 'Mirage': 'Mirage.csv',
 'Nuke': 'Nuke.csv',
