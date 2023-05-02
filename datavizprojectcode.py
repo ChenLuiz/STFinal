@@ -38,6 +38,7 @@ with col3:
    )
 
 with st.container():
+   data['date'] = pd.to_datetime(data['date'])
 
    data_chart1 = pd.read_csv('updated_file.csv')
 
