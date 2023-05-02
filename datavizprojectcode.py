@@ -21,12 +21,14 @@ year_datasets = {
          '2017': '2017.csv',
          '2018': '2018.csv',
          '2019': '2019.csv',
-         '2020': '2020.csv'
+         '2020': '2020.csv',
+         'All data': 'updated_file.csv'
 }
 event_datasets = {
          '3883': '3883.csv',
          '4597': '4597.csv',
-         '4702': '4702.csv'
+         '4702': '4702.csv',
+         'All data': 'updated_file.csv'
 }
 
 with col1:
@@ -44,11 +46,7 @@ with col2:
    )
 
 with st.container():
-   label_dict = {1: 'Cache', 2: 'Cobblestone', 3: 'Dust2', 4: 'Inferno', 5: 'Mirage', 6: 'Nuke', 7: 'Overpass', 8: 'Train', 9: 'Vertigo'}
-   data_chart1 = pd.read_csv('updated_file.csv')
-   data_chart1_labels = pd.DataFrame({'Map': label_dict.values()})
-
-   data_pie = pd.read_csv("updated_file.csv")
+   data_pie = pd.read_csv(datasets[dataset_choice])
 
    data_pie["left_over"] = data_pie["left_over"].map(label_dict)
 
