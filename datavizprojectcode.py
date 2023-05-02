@@ -78,6 +78,7 @@ with st.container():
    )
 
    st.altair_chart(bars, use_container_width=False)
+   st.write("This graph uses data from 2016-2020")
    
 with st.container():
     data_scatter = pd.read_csv('pick_count.csv')
@@ -92,7 +93,7 @@ with st.container():
     ).interactive()
 
     st.altair_chart(scatter_plot, use_container_width=True)
-st.write("This graph uses data from 2016-2020")
+      
 with st.container():
          map_datasets = {
          'Cache': 'Cache.csv',
