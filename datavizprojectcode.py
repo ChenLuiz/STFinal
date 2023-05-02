@@ -9,24 +9,22 @@ alt.data_transformers.disable_max_rows()
 
 st.subheader("Introduction")
 
-st.write("""CSGO (Counter-Strike: Global Offensive) is a popular first-person shooter video game. 
-Players are divided into two teams, terrorists and counter-terrorists, and must complete objectives or eliminate the opposing team. 
-The game features a wide variety of weapons and equipment, and players earn money by completing objectives and killing enemies to purchase better gear. 
-CSGO also has a competitive matchmaking mode where players can compete for rankings and prizes. The game requires strategy, communication, and quick reflexes.
+st.write("""CSGO (Counter-Strike: Global Offensive) is one of the most popular competitive first-person shooters out there. 
+Players are divided into two teams, terrorists and counter-terrorists, and must complete objectives or eliminate the opposing team.
 In pro CSGO matches, teams ban maps until one is left, then take turns choosing the next map. 
 Matches are best-of-three, with each team playing as both terrorists and counter-terrorists. 
 The main research question I wanted to answer is: 
 What are the most popular and most unpopular maps in CSGO?""")
 st.write("""
 The dataset used for this project is a CSGO csv database with map picks and vetos of matches between the top 30 teams. 
-The data included is consisted of: date the match was played, team 1, team 2, inverted teams 
+The data included consists of: date the match was played, team 1, team 2, inverted teams 
 (which shows us which team started banning maps first), the match ID, the even ID, best of 
 format, system for picking and banning (example: 123412 t1_remove, t2_remove, t1_pick, t2_pick, t1_remove, t2_remove, left_over), 
 which map was removed by team 1, which map was returned by team 2, which map was removed by team 1 in a bo1 format 
 (this column has a lot of 0's since most matches were best of 3s) and so on. My EDA revealed that a couple of interesting things about Normalization in this dataset:\n
 Cache makes up 8% of maps played, Cobble makes up only 6%, Dust 2 makes up 9%, and Vertigo makes up only 1% of maps played. 
 This is most likely because all of these maps were either removed from active duty earlier on or were added late into the game, or in Dust 2's case both.
-Maps like Mirage (20%), Inferno(18%), and Overpass(12%) all have massive pickrates in comparisson because of how long they've been in the game untouched.""")
+Maps like Mirage (20%), Inferno(18%), and Overpass(12%) all have massive pickrates in comparison because of how long they've been in the game untouched.""")
 
 with st.container():
    year_datasets = {
@@ -59,7 +57,6 @@ with st.container():
    st.altair_chart(pop_map, use_container_width=True)
 
 with st.container():
-
    data = pd.read_csv('ban_count.csv')
 
    click = alt.selection_multi(encodings=['color'])
@@ -95,7 +92,7 @@ with st.container():
     ).interactive()
 
     st.altair_chart(scatter_plot, use_container_width=True)
-
+st.write("This graph uses data from 2016-2020")
 with st.container():
          map_datasets = {
          'Cache': 'Cache.csv',
