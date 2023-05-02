@@ -70,28 +70,8 @@ with st.container():
 
    st.altair_chart(Cumulative_maps + Map_ticks, use_container_width=True)
 
-col4, col5 = st.columns(2)
-
-with col4:
-   add_selectbox5 = st.selectbox(
-    "Select Year",
-    ("2016", "2017", "2018", "2019", "2020"),
-    key = "col4"
-   )
-
-   add_selectbox6 = st.selectbox(
-    "Select Map",
-    ("Mirage", "Inferno", "Nuke", "Overpass", "Cobblestone", "Dust 2", "Vertigo", "Cache", "Train"),
-    key = "col4-1"
-   )
+with st.container():
     
-   add_selectbox7 = st.selectbox(
-    "Select Event",
-    ("Kato", "IEM", "Blast", "ESL"),
-    key = "col4-2"
-   )
-
-with col5:
    data = pd.read_csv('ban_count.csv')
 
    click = alt.selection_multi(encodings=['color'])
