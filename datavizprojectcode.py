@@ -3,7 +3,7 @@ import numpy as np
 import pandas as pd
 import altair as alt
 
-st.title("CS:GO Pro match data analysis")
+st.title("Counter Strike - Global Offensive Pro Match Data Analysis")
 # Disables stupid max rows for data input
 alt.data_transformers.disable_max_rows()
 
