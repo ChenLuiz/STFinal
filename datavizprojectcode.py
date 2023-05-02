@@ -78,7 +78,7 @@ with st.container():
    )
 
    st.altair_chart(bars, use_container_width=False)
-   st.write("This graph uses data from 2016-2020")
+   st.write("This graph uses data from 2016-2020\n\n")
    
 with st.container():
     data_scatter = pd.read_csv('pick_count.csv')
