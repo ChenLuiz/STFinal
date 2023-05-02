@@ -57,7 +57,6 @@ with st.container():
    st.altair_chart(pop_map, use_container_width=True)
 
 with st.container():   
-   st.write("This graph uses data from 2016-2020")
    data = pd.read_csv('ban_count.csv')
 
    click = alt.selection_multi(encodings=['color'])
@@ -77,7 +76,7 @@ with st.container():
    ).add_selection(
    click
    )
-
+   st.write("This graph uses data from 2016-2020")
    st.altair_chart(bars, use_container_width=False)
    
 with st.container():
