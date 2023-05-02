@@ -46,7 +46,14 @@ with col2:
    )
 
 with st.container():
-   data_pie = pd.read_csv(datasets[dataset_choice])
+   # Load the data based on the user's event selection
+   if event_id == "All data":
+       data_pie = pd.read_csv(event_datasets[event_id])
+   else:
+       data_pie = pd.read_csv(f"{event_id}/{event_id}_{year}.csv")
+
+   # Apply filters based on the user's year and event selections
+   data_pie = data_pie[(data_pie["Year"] == year) | (data_pie["Event ID"] == event_id)]
 
    data_pie["left_over"] = data_pie["left_over"].map(label_dict)
 
