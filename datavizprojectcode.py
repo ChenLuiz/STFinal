@@ -16,17 +16,30 @@ st.write("""The dataset used for this project is a CSGO csv database with map pi
 
 col1, col2 = st.columns(2)
 
+year_datasets = {
+         '2016': '2016.csv'
+         '2017': '2017.csv'
+         '2018': '2018.csv'
+         '2019': '2019.csv'
+         '2020': '2020.csv'
+}
+event_datasets = {
+         '3883': '3883.csv'
+         '4597': '4597.csv'
+         '4702': '4702.csv'
+}
+
 with col1:
    year = st.selectbox(
     "Select Year",
-    ("2016", "2017", "2018", "2019", "2020"),
+    list(year_datasets.keys),
     key = "year"
    )
 
 with col2:
    event_id = st.selectbox(
     "Select Event",
-    ("3883", "4702", "4597"),
+    list(event_datasets.keys),
     key = "event_id"
    )
 
