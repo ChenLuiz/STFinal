@@ -87,17 +87,16 @@ map_datasets = {
 
 dataset_choice = st.selectbox('Select a dataset: ', list(map_datasets.keys()))
 
-with st.container():
-   data_chart1 = pd.read_csv(map_datasets[dataset_choice])
+data_chart1 = pd.read_csv(map_datasets[dataset_choice])
 
-   label_dict = {1: 'Cache', 2: 'Cobblestone', 3: 'Dust2', 4: 'Inferno', 5: 'Mirage', 6: 'Nuke', 7: 'Overpass', 8: 'Train', 9: 'Vertigo'}
+label_dict = {1: 'Cache', 2: 'Cobblestone', 3: 'Dust2', 4: 'Inferno', 5: 'Mirage', 6: 'Nuke', 7: 'Overpass', 8: 'Train', 9: 'Vertigo'}
 
-   Cumulative_maps = alt.Chart(data_chart1).transform_window(
-   cumulative_count = "count()",
-   sort=[{"field": "date"}],
-   ).mark_area(color="darkseagreen").encode(
-   x = alt.X("date:T", title = "Date"),
-   y = alt.Y("cumulative_count:Q", title = "Times it has been picked"),
-   )
+Cumulative_maps = alt.Chart(data_chart1).transform_window(
+cumulative_count = "count()",
+sort=[{"field": "date"}],
+).mark_area(color="darkseagreen").encode(
+x = alt.X("date:T", title = "Date"),
+y = alt.Y("cumulative_count:Q", title = "Times it has been picked"),
+)
 
-   st.altair_chart(Cumulative_maps, use_container_width=True)
+st.altair_chart(Cumulative_maps, use_container_width=True)
