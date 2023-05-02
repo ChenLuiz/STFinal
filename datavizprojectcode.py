@@ -17,46 +17,58 @@ st.write("""The dataset used for this project is a CSGO csv database with map pi
          What are the most popular maps in CSGO?""")
 
 with col1:
-   add_selectbox2 = st.selectbox(
+   year = st.selectbox(
     "Select Year",
     ("2016", "2017", "2018", "2019", "2020"),
-    key = "col1"
+    key = "year"
    )
 
 with col2:
-   add_selectbox3 = st.selectbox(
+   map_number = st.selectbox(
     "Select Map",
-    ("Mirage", "Inferno", "Nuke", "Overpass", "Cobblestone", "Dust 2", "Vertigo", "Cache", "Train"),
-    key = "col2"
+    ("1", "2", "3", "4", "5", "6", "7", "8", "9"),
+    key = "map_number"
    )
 
 with col3:
-   add_selectbox4 = st.selectbox(
+   event_id = st.selectbox(
     "Select Event",
-    ("Kato", "IEM", "Blast", "ESL"),
-    key = "col3"
+    ("3883", "4702", "4597"),
+    key = "event_id"
    )
 
 with st.container():
 
+   data_chart1 = pd.read_csv('updated_file.csv')
+
    label_dict = {1: 'Cache', 2: 'Cobblestone', 3: 'Dust2', 4: 'Inferno', 5: 'Mirage', 6: 'Nuke', 7: 'Overpass', 8: 'Train', 9: 'Vertigo'}
 
-   data_chart1 = pd.read_csv('updated_file.csv')
-   data_chart1_labels = pd.DataFrame({'Map': label_dict.values()})
+   # Filter data
+   filtered_data = data_chart1[(data_chart1['year'].dt.year == year) & (data_chart1['event_id'] == event_id)]
 
-   Cumulative_maps = alt.Chart(data_chart1).transform_window(
-        cumulative_count = "count()",
-        sort=[{"field": "left_over"}],
-   ).mark_area(color="darkseagreen").encode(
-        x = alt.X("left_over:Q", title = "Map", axis=alt.Axis(values=[1, 2, 3, 4, 5, 6, 7, 8, 9])),
-        y = alt.Y("cumulative_count:Q", title = "Times it has been picked"),
+   # Convert map labels to numbers so I can actually use this
+   map_label_dict = {v: k for k, v in label_dict.items()}
+   filtered_data['left_over'] = filtered_data['left_over'].map(map_label_dict)
+
+   # Group data by map and count the number of times each map was picked
+   map_counts = filtered_data.groupby('left_over')['match_id'].count().reset_index()
+   map_counts.columns = ['left_over', 'count']
+
+   map_counts['cumulative_count'] = map_counts['count'].cumsum()
+
+   # finally create chart
+   chart = alt.Chart(map_counts).mark_area(color="darkseagreen").encode(
+           x = alt.X("left_over:Q", title = "Map", axis=alt.Axis(values=[1, 2, 3, 4, 5, 6, 7, 8, 9])),
+           y = alt.Y("cumulative_count:Q", title = "Times it has been picked"),
    )
 
-   Map_ticks = alt.Chart(data_chart1_labels).mark_rule(color='seagreen', strokeWidth=5).encode(
-        x=alt.X('Map:N', axis=None),
+   # add map labels as ticks
+   map_ticks = alt.Chart(pd.DataFrame({'Map': label_dict.values()})).mark_rule(color='seagreen', strokeWidth=5).encode(
+           x=alt.X('Map:N', axis=None),
    )
 
-   st.altair_chart(Cumulative_maps + Map_ticks, use_container_width=True)
+   # display chart
+   st.altair_chart(chart + map_ticks, use_container_width=True)
 
 with st.container():
     
