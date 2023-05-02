@@ -50,7 +50,6 @@ with col3:
    )
 
 with st.container():
-   st.write("This is inside the container")
 
    label_dict = {1: 'Cache', 2: 'Cobblestone', 3: 'Dust2', 4: 'Inferno', 5: 'Mirage', 6: 'Nuke', 7: 'Overpass', 8: 'Train', 9: 'Vertigo'}
 
@@ -70,8 +69,6 @@ with st.container():
    )
 
    st.altair_chart(Cumulative_maps + Map_ticks, use_container_width=True)
-
-st.write("This is outside the container")
 
 col4, col5 = st.columns(2)
 
