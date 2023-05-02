@@ -16,11 +16,25 @@ st.write("""The dataset used for this project is a CSGO csv database with map pi
          (this column has a lot of 0's since most matches were best of 3s) and so on. The main research question I wanted to answer is: 
          What are the most popular maps in CSGO?""")
 
+with col1:
+   year = st.selectbox(
+    "Select Year",
+    ("2016", "2017", "2018", "2019", "2020"),
+    key = "year"
+   )
+
 with col2:
    map_number = st.selectbox(
     "Select Map",
     ("1", "2", "3", "4", "5", "6", "7", "8", "9"),
     key = "map_number"
+   )
+
+with col3:
+   event_id = st.selectbox(
+    "Select Event",
+    ("3883", "4702", "4597"),
+    key = "event_id"
    )
 
 with st.container():
