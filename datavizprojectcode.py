@@ -94,7 +94,7 @@ label_dict = {1: 'Cache', 2: 'Cobblestone', 3: 'Dust2', 4: 'Inferno', 5: 'Mirage
 Cumulative_maps = alt.Chart(data_chart1).transform_window(
 cumulative_count = "count()",
 sort=[{"field": "date"}],
-).mark_area(color="darkseagreen").encode(
+).mark_area(color="white").encode(
 x = alt.X("date:T", title = "Date"),
 y = alt.Y("cumulative_count:Q", title = "Times it has been picked"),
 )
