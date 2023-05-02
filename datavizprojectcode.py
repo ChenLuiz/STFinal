@@ -82,16 +82,13 @@ with st.container():
    color=alt.Color('colors:N', scale=None),
    angle=alt.Angle('map_name:N', sort=alt.EncodingSortField('count', order='ascending')),
    tooltip=['count:Q']
-   ).properties(
-   width=600,
-   height=600
    ).configure_axis(
    grid=False
    ).add_selection(
    click
    )
 
-   st.altair_chart(bars, use_container_width=False)
+   st.altair_chart(bars, use_container_width=True)
 
 with st.container():
     data_scatter = pd.read_csv('pick_count.csv')
