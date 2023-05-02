@@ -55,7 +55,7 @@ with st.container():
    color=alt.Color("count:Q", scale=alt.Scale(scheme="greens")),
    tooltip=["map", "count"]
    ).properties(
-   title="Most Popular Map"
+   title="Most Popular Left Over Map"
    )
 
    st.altair_chart(pop_map, use_container_width=True)
@@ -90,6 +90,8 @@ with st.container():
    grid=False
    ).add_selection(
    click
+   ).properties(
+   title='Most Popular Map based on all data'
    )
 
    st.altair_chart(bars, use_container_width=True)
