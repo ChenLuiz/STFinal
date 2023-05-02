@@ -38,35 +38,30 @@ with col3:
    )
 
 with st.container():
-   data_chart1 = pd.read_csv('updated_file.csv')
 
-   data_chart1['date'] = pd.to_datetime(data_chart1['date'])
-
+   # You can call any Streamlit command, including custom components:
    label_dict = {1: 'Cache', 2: 'Cobblestone', 3: 'Dust2', 4: 'Inferno', 5: 'Mirage', 6: 'Nuke', 7: 'Overpass', 8: 'Train', 9: 'Vertigo'}
 
-   # Filter data
-   filtered_data = data_chart1[(data_chart1['date'].dt.year == year) & (data_chart1['event_id'] == event_id)]
+   data_chart1 = pd.read_csv('updated_file.csv')
+   data_chart1_labels = pd.DataFrame({'Map': label_dict.values()})
 
-   # Convert map labels to numbers so I can actually use this
-   map_label_dict = {v: k for k, v in label_dict.items()}
-   filtered_data['left_over'] = filtered_data['left_over'].map(map_label_dict)
-
-   # Group data by map and count the number of times each map was picked
-   map_counts = filtered_data.groupby('left_over')['match_id'].count().reset_index()
-   map_counts.columns = ['left_over', 'count']
-
-   map_counts['cumulative_count'] = map_counts['count'].cumsum()
-
-   # finally create chart
-   chart = alt.Chart(map_counts).mark_area(color="darkseagreen").encode(
-           x = alt.X("left_over:Q", title = "Map", axis=alt.Axis(values=[1, 2, 3, 4, 5, 6, 7, 8, 9])),
-           y = alt.Y("cumulative_count:Q", title = "Times it has been picked"),
+   # create a chart with the area mark
+   Cumulative_maps = alt.Chart(data_chart1).transform_window(
+        cumulative_count = "count()",
+        sort=[{"field": "left_over"}],
+        #tooltip = ['left_over']
+   ).mark_area(color="darkseagreen").encode(
+        x = alt.X("left_over:Q", title = "Map", axis=alt.Axis(values=[1, 2, 3, 4, 5, 6, 7, 8, 9])),
+        y = alt.Y("cumulative_count:Q", title = "Times it has been picked"),
    )
 
-   # add map labels as ticks
-   map_ticks = alt.Chart(pd.DataFrame({'Map': label_dict.values()})).mark_rule(color='seagreen', strokeWidth=5).encode(
-           x=alt.X('Map:N', axis=None),
+   # create a chart with the vertical lines
+   Map_ticks = alt.Chart(data_chart1_labels).mark_rule(color='seagreen', strokeWidth=5).encode(
+        x=alt.X('Map:N', axis=None),
    )
+
+   # layer the two charts and show the result
+   st.altair_chart(Cumulative_maps + Map_ticks, use_container_width=True)
 
    # display chart
    st.altair_chart(chart + map_ticks, use_container_width=True)
