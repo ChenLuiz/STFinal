@@ -6,18 +6,6 @@ import altair as alt
 # Disables stupid max rows for data input
 alt.data_transformers.disable_max_rows()
 
-add_selectbox = st.sidebar.selectbox(
-    "Select Year",
-    ("2016", "2017", "2018", "2019", "2020"),
-    key = "Sidebar"
-)
-
-with st.sidebar:
-    add_radio = st.radio(
-        "Select Map",
-        ("Mirage", "Inferno", "Nuke", "Overpass", "Cobblestone", "Dust 2", "Vertigo", "Cache", "Train")
-    )
-
 col1, col2, col3 = st.columns(3)
 
 st.write("""The dataset used for this project is a CSGO csv database with map picks and vetos of matches between the top 30 teams. 
