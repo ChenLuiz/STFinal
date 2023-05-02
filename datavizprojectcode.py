@@ -14,6 +14,22 @@ st.write("""The dataset used for this project is a CSGO csv database with map pi
          (this column has a lot of 0's since most matches were best of 3s) and so on. The main research question I wanted to answer is: 
          What are the most popular maps in CSGO?""")
 
+col1, col2 = st.columns(2)
+
+with col1:
+   year = st.selectbox(
+    "Select Year",
+    ("2016", "2017", "2018", "2019", "2020"),
+    key = "year"
+   )
+
+with col2:
+   event_id = st.selectbox(
+    "Select Event",
+    ("3883", "4702", "4597"),
+    key = "event_id"
+   )
+
 with st.container():
    label_dict = {1: 'Cache', 2: 'Cobblestone', 3: 'Dust2', 4: 'Inferno', 5: 'Mirage', 6: 'Nuke', 7: 'Overpass', 8: 'Train', 9: 'Vertigo'}
    data_chart1 = pd.read_csv('updated_file.csv')
@@ -50,23 +66,6 @@ with st.container():
     ).interactive()
 
     st.altair_chart(scatter_plot, use_container_width=True)
-
-
-col1, col2 = st.columns(2)
-
-with col1:
-   year = st.selectbox(
-    "Select Year",
-    ("2016", "2017", "2018", "2019", "2020"),
-    key = "year"
-   )
-
-with col2:
-   event_id = st.selectbox(
-    "Select Event",
-    ("3883", "4702", "4597"),
-    key = "event_id"
-   )
 
 with st.container():
 
