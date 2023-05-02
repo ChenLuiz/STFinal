@@ -76,23 +76,27 @@ with col3:
    )
 
 with st.container():
-    
-   data = pd.read_csv('ban_count.csv')
 
-   click = alt.selection_multi(encodings=['color'])
+    data_bars = pd.read_csv('ban_count.csv')
 
-   bars = alt.Chart(data).mark_bar(strokeWidth=1, stroke='black').encode(
-   alt.X('count:Q', axis=alt.Axis(ticks=True), title="Count"),
-   alt.Y('map_name:N', sort=alt.EncodingSortField('count', order='ascending'), title="Map Name"),
-   color=alt.Color('colors:N', scale=None),
-   angle=alt.Angle('map_name:N', sort=alt.EncodingSortField('count', order='ascending')),
-   tooltip=['count:Q']
-   ).configure_axis(
-   grid=False
-   ).add_selection(
-   click
-   ).properties(
-   title='Most Popular Map based on all data'
-   )
+    click = alt.selection_multi(encodings=['color'])
 
-   st.altair_chart(bars, use_container_width=True)
+    filtered_data = data_bars[(data_bars['Year'] == int(year)) | 
+                         (data_bars['map_number'] == int(map_number)) | 
+                         (data_bars['event_id'] == int(event_id))]
+
+     bars = alt.Chart(filtered_data).mark_bar(strokeWidth=1, stroke='black').encode(
+     alt.X('count:Q', axis=alt.Axis(ticks=True), title="Count"),
+     alt.Y('map_name:N', sort=alt.EncodingSortField('count', order='ascending'), title="Map Name"),
+     color=alt.Color('colors:N', scale=None),
+     angle=alt.Angle('map_name:N', sort=alt.EncodingSortField('count', order='ascending')),
+     tooltip=['count:Q']
+     ).configure_axis(
+     grid=False
+     ).add_selection(
+     click
+     ).properties(
+     title='Most Popular Map based on all data'
+     )
+
+     st.altair_chart(bars, use_container_width=True)
