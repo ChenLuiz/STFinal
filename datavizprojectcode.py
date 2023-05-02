@@ -32,14 +32,14 @@ event_datasets = {
 with col1:
    year = st.selectbox(
     "Select Year",
-    list(year_datasets.keys),
+    list(year_datasets.keys()),
     key = "year"
    )
 
 with col2:
    event_id = st.selectbox(
     "Select Event",
-    list(event_datasets.keys),
+    list(event_datasets.keys()),
     key = "event_id"
    )
 
