@@ -74,10 +74,7 @@ with st.container():
 
     click = alt.selection_multi(encodings=['color'])
 
-    filtered_data = data_bars[(data_bars['Year'] == int(year)) | 
-                         (data_bars['event_id'] == int(event_id))]
-
-    bars = alt.Chart(filtered_data).mark_bar(strokeWidth=1, stroke='black').encode(
+    bars = alt.Chart(data_bars).mark_bar(strokeWidth=1, stroke='black').encode(
     alt.X('count:Q', axis=alt.Axis(ticks=True), title="Count"),
     alt.Y('map_name:N', sort=alt.EncodingSortField('count', order='ascending'), title="Map Name"),
     color=alt.Color('colors:N', scale=None),
