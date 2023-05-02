@@ -102,6 +102,8 @@ with col5:
    # You can call any Streamlit command, including custom components:
    data = pd.read_csv('ban_count.csv')
 
+   click = alt.selection_multi(encodings=['color'])
+
    bars = alt.Chart(data).mark_bar(strokeWidth=1, stroke='black').encode(
    alt.X('count:Q', axis=alt.Axis(ticks=True), title="Count"),
    alt.Y('map_name:N', sort=alt.EncodingSortField('count', order='ascending'), title="Map Name"),
@@ -113,7 +115,9 @@ with col5:
    height=600
    ).configure_axis(
    grid=False
-   ).interactive()
+   ).add_selection(
+   click
+   )
 
    st.altair_chart(bars, use_container_width=False)
 
