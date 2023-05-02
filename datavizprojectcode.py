@@ -38,12 +38,12 @@ with col3:
    )
 
 with st.container():
+   label_dict = {1: 'Cache', 2: 'Cobblestone', 3: 'Dust2', 4: 'Inferno', 5: 'Mirage', 6: 'Nuke', 7: 'Overpass', 8: 'Train', 9: 'Vertigo'}
    data_chart1 = pd.read_csv('updated_file.csv')
    data_chart1_labels = pd.DataFrame({'Map': label_dict.values()})
 
    data_pie = pd.read_csv("updated_file.csv")
 
-   label_dict = {1: 'Cache', 2: 'Cobblestone', 3: 'Dust2', 4: 'Inferno', 5: 'Mirage', 6: 'Nuke', 7: 'Overpass', 8: 'Train', 9: 'Vertigo'}
    data_pie["left_over"] = data_pie["left_over"].map(label_dict)
 
    counts = data_pie["left_over"].value_counts().reset_index()
