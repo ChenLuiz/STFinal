@@ -82,7 +82,7 @@ with st.container():
     click = alt.selection_multi(encodings=['color'])
 
     filtered_data = data_bars[(data_bars['Year'] == int(year)) | 
-                         (data_bars['map_number'] == int(map_number)) | 
+                         (data_bars['t1_picked_1'] == int(map_number)) | 
                          (data_bars['event_id'] == int(event_id))]
 
     bars = alt.Chart(filtered_data).mark_bar(strokeWidth=1, stroke='black').encode(
