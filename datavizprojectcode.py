@@ -20,6 +20,14 @@ with st.sidebar:
 
 col1, col2, col3 = st.columns(3)
 
+st.write("""The dataset used for this project is a CSGO csv database with map picks and vetos of matches between the top 30 teams. 
+         The data included is consisted of: date the match was played, team 1, team 2, inverted teams 
+         (which shows us which team started banning maps first), the match ID, the even ID, best of 
+         format, system for picking and banning (example: 123412 t1_remove, t2_remove, t1_pick, t2_pick, t1_remove, t2_remove, left_over), 
+         which map was removed by team 1, which map was returned by team 2, which map was removed by team 1 in a bo1 format 
+         (this column has a lot of 0's since most matches were best of 3s) and so on. The main research question I wanted to answer is: 
+         What are the most popular maps in CSGO?""")
+
 with col1:
    add_selectbox2 = st.selectbox(
     "Select Year",
