@@ -29,8 +29,18 @@ This is most likely because all of these maps were either removed from active du
 Maps like Mirage (20%), Inferno(18%), and Overpass(12%) all have massive pickrates in comparisson because of how long they've been in the game untouched.""")
 
 with st.container():
+   year_datasets = {
+         '2016': '2016.csv',
+         '2017': '2017.csv',
+         '2018': '2018.csv',
+         '2019': '2019.csv',
+         '2020': '2020.csv',
+         'All data': 'updated_file.csv'
+         }
+
+   dataset_choice = st.selectbox('Select a dataset: ', list(year_datasets.keys()))
    label_dict = {1: 'Cache', 2: 'Cobblestone', 3: 'Dust2', 4: 'Inferno', 5: 'Mirage', 6: 'Nuke', 7: 'Overpass', 8: 'Train', 9: 'Vertigo'}
-   data_pie = pd.read_csv('updated_file.csv')
+   data_pie = pd.read_csv(year_datasets[dataset_choice])
 
    data_pie["left_over"] = data_pie["left_over"].map(label_dict)
 
@@ -100,9 +110,9 @@ with st.container():
          'All data': 'updated_file.csv'
          }
 
-         dataset_choice = st.selectbox('Select a dataset: ', list(map_datasets.keys()))
+         dataset_choices = st.selectbox('Select a dataset: ', list(map_datasets.keys()))
 
-         data_chart1 = pd.read_csv(map_datasets[dataset_choice]).sort_values('date')
+         data_chart1 = pd.read_csv(map_datasets[dataset_choices]).sort_values('date')
          data_chart1['date'] = pd.to_datetime(data_chart1['date'])
          label_dict = {1: 'Cache', 2: 'Cobblestone', 3: 'Dust2', 4: 'Inferno', 5: 'Mirage', 6: 'Nuke', 7: 'Overpass', 8: 'Train', 9: 'Vertigo'}
 
