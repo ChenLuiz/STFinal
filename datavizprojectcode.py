@@ -53,7 +53,7 @@ with st.container():
        data_pie = pd.read_csv(f"{event_id}.csv")
 
    # Apply filters based on the user's year and event selections
-   data_pie = data_pie[(data_pie["Year"] == year) | (data_pie["Event ID"] == event_id)]
+   data_pie = data_pie[(data_pie["Year"] == year) | (data_pie["event_id"] == event_id)]
 
    data_pie["left_over"] = data_pie["left_over"].map(label_dict)
 
