@@ -44,7 +44,7 @@ with st.container():
    label_dict = {1: 'Cache', 2: 'Cobblestone', 3: 'Dust2', 4: 'Inferno', 5: 'Mirage', 6: 'Nuke', 7: 'Overpass', 8: 'Train', 9: 'Vertigo'}
 
    # Filter data
-   filtered_data = data_chart1[(data_chart1['year'].dt.year == year) & (data_chart1['event_id'] == event_id)]
+   filtered_data = data_chart1[(data_chart1['Year'].dt.year == year) & (data_chart1['event_id'] == event_id)]
 
    # Convert map labels to numbers so I can actually use this
    map_label_dict = {v: k for k, v in label_dict.items()}
