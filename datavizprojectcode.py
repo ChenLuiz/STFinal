@@ -70,22 +70,23 @@ with col2:
 
 with st.container():
 
-    data_bars = pd.read_csv('updated_file.csv')
+   data = pd.read_csv('ban_count.csv')
 
-    click = alt.selection_multi(encodings=['color'])
+   click = alt.selection_multi(encodings=['color'])
 
-    bars = alt.Chart(data_bars).mark_bar(strokeWidth=1, stroke='black').encode(
-    alt.X('count:Q', axis=alt.Axis(ticks=True), title="Count"),
-    alt.Y('map_name:N', sort=alt.EncodingSortField('count', order='ascending'), title="Map Name"),
-    color=alt.Color('colors:N', scale=None),
-    angle=alt.Angle('map_name:N', sort=alt.EncodingSortField('count', order='ascending')),
-    tooltip=['count:Q']
-    ).configure_axis(
-    grid=False
-    ).add_selection(
-    click
-    ).properties(
-    title='Most Popular Map based on all data'
-    )
+   bars = alt.Chart(data).mark_bar(strokeWidth=1, stroke='black').encode(
+   alt.X('count:Q', axis=alt.Axis(ticks=True), title="Count"),
+   alt.Y('map_name:N', sort=alt.EncodingSortField('count', order='ascending'), title="Map Name"),
+   color=alt.Color('colors:N', scale=None),
+   angle=alt.Angle('map_name:N', sort=alt.EncodingSortField('count', order='ascending')),
+   tooltip=['count:Q']
+   ).properties(
+   width=600,
+   height=600
+   ).configure_axis(
+   grid=False
+   ).add_selection(
+   click
+   )
 
-    st.altair_chart(bars, use_container_width=True)
+   st.altair_chart(bars, use_container_width=False)
