@@ -63,9 +63,6 @@ with st.container():
    # layer the two charts and show the result
    st.altair_chart(Cumulative_maps + Map_ticks, use_container_width=True)
 
-   # display chart
-   st.altair_chart(chart + map_ticks, use_container_width=True)
-
 with st.container():
     
    data = pd.read_csv('ban_count.csv')
