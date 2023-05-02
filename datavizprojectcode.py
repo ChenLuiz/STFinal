@@ -77,7 +77,7 @@ with col3:
 
 with st.container():
 
-    data_bars = pd.read_csv('ban_count.csv')
+    data_bars = pd.read_csv('updated_file.csv')
 
     click = alt.selection_multi(encodings=['color'])
 
